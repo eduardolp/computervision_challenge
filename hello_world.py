@@ -19,3 +19,5 @@ px = img[100,100]
 
 blue = img[100,100,0]
 print(blue)
+
+print('mudança trivial')
