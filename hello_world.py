@@ -3,7 +3,10 @@ import numpy as np
 import sys
 
 # img = cv.imread(cv.samples.findFile("starry_night.jpg"))
+# Reads the given image
 img = cv.imread('given_data/real_original.jpg')
+
+# Tests whether the image read operation worked
 if img is None:
     sys.exit("Could not read the image.")
 
