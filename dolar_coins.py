@@ -7,20 +7,20 @@ img = cv.imread('given_data/dolar_original.png')
 
 # Tests whether the image read operation worked
 if img is None:
-    sys.exit("Could not read the image.")
+    sys.exit('Could not read the image.')
 
 # Displays the images and waits until the user presses a key to close it
-cv.imshow("Original image", img)
+cv.imshow('Original image', img)
 k = cv.waitKey(0)
 
 # Convert into grayscale and display it
 img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-cv.imshow("Grayscale image", img_gray)
+cv.imshow('Grayscale image', img_gray)
 k = cv.waitKey(0)
 
 # Inverse binary threshold conversion and display
 ret, img_bin = cv.threshold(img_gray,35,255,cv.THRESH_BINARY_INV)
-cv.imshow("Binary Threshold", img_bin)
+cv.imshow('Binary Threshold', img_bin)
 k = cv.waitKey(0)
 
 # Apply morphological filter
@@ -31,10 +31,10 @@ kernel = np.ones((5,5), np.uint8)
 # img_dilated = cv.dilate(img_bin, kernel, iterations=1)
 # img_open = cv.morphologyEx(img_bin, cv.MORPH_OPEN, kernel)
 img_close = cv.morphologyEx(img_bin, cv.MORPH_CLOSE, kernel, iterations=3)
-# cv.imshow("Eroded img", img_eroded)
-# cv.imshow("Dilated img", img_dilated)
-# cv.imshow("Openned img", img_open)
-cv.imshow("Morphological filter img - Type Closed", img_close)
+# cv.imshow('Eroded img', img_eroded)
+# cv.imshow('Dilated img', img_dilated)
+# cv.imshow('Openned img', img_open)
+cv.imshow('Morphological filter img - Type Closed', img_close)
 k = cv.waitKey(0)
 
 # Setup SimpleBlobDetector ans it's parameters.
@@ -42,7 +42,7 @@ params = cv.SimpleBlobDetector_Params()
 
 # Filter the blob by area.
 params.filterByArea = True
-params.minArea = 1000
+params.minArea = 1000 # Guarantees small blobs are ignored
 params.maxArea = 100000
 
 # Initialize SimpleBlobDetector with the above defined parameters
@@ -61,7 +61,7 @@ img_filtered_with_keypoints = cv.drawKeypoints(img_close, keypoints, np.array([]
                                         cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
 # Show keypoints drawn over the filtered image
-cv.imshow("Keypoints over filtered img", img_filtered_with_keypoints)
+cv.imshow('Keypoints over filtered img', img_filtered_with_keypoints)
 cv.waitKey(0)
 
 # ensure at least some circles were found
@@ -74,8 +74,8 @@ if keypoints is not None:
         centers.append(i.pt)
         radii.append(i.size/2)
     # convert the (x, y) coordinates and radius of the circles to integers
-    centers = np.round(centers[:]).astype("int")
-    radii = np.round(radii[:]).astype("int")
+    centers = np.round(centers[:]).astype('int')
+    radii = np.round(radii[:]).astype('int')
     # loop over the (x, y) coordinates and radius of the circles
     for i,j in enumerate(centers):
         # draw the circle in the output image, then draw a rectangle
@@ -85,7 +85,7 @@ if keypoints is not None:
 
 
 # show the output image
-cv.imshow("output", output)
+cv.imshow('output', output)
 cv.waitKey(0)
 
 # Save otput to image_result directory
